@@ -166,7 +166,7 @@ export function Workspace() {
       if (pw.user || pw.owner) {
         d.encrypt({
           userPassword: pw.user, ownerPassword: pw.owner || pw.user || crypto.randomUUID(),
-          permissions: { copying: !pw.noCopy, printing: pw.noPrint ? undefined : "highResolution", modifying: !pw.noModify, annotating: !pw.noModify },
+          permissions: { copying: !pw.noCopy, printing: pw.noPrint ? false : "highResolution", modifying: !pw.noModify, annotating: !pw.noModify },
         });
       }
       download(await d.save(), `${baseName(name)}-edited.pdf`);
@@ -235,7 +235,7 @@ export function Workspace() {
           </>)}
 
           {(tool === "watermark" || tool === "numbers") && (
-            <button disabled={busy || !draft} onClick={() => draftOp && run(draftOp, "Applied")}
+            <button disabled={busy || !draft} onClick={() => { if (draftOp) { setTool("pages"); run(draftOp, "Applied"); } }}
               className="flex h-9 w-full items-center justify-center gap-2 rounded-md bg-primary text-sm font-medium text-primary-foreground disabled:opacity-50">
               {busy && <Spinner />} Apply to document
             </button>
