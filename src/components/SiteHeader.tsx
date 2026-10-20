@@ -10,7 +10,10 @@ export function SiteHeader() {
           Folio
         </Link>
         <span className="hidden text-xs text-muted-foreground sm:inline">100% in your browser</span>
-        <div className="ml-auto"><ThemeToggle /></div>
+        <div className="ml-auto flex items-center gap-3">
+          <Link to="/workspace" className="text-sm text-muted-foreground transition hover:text-foreground">Workspace</Link>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

@@ -37,6 +37,9 @@ function Index() {
           <p className="mt-5 max-w-xl text-muted-foreground">
             Compare, edit, sign, watermark and secure documents. Everything is processed locally on your device.
           </p>
+          <Link to="/workspace" className="mt-8 inline-flex h-11 items-center gap-2 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition hover:opacity-90">
+            Open a PDF in the workspace <ArrowUpRight className="size-4" />
+          </Link>
         </section>
         <div className="space-y-12">
           {groups.map((g) => (
