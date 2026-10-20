@@ -29,10 +29,14 @@ export async function renderPage(
 ) {
   const page = await doc.getPage(pageNum);
   const viewport = page.getViewport({ scale });
-  canvas.width = Math.floor(viewport.width);
-  canvas.height = Math.floor(viewport.height);
-  const ctx = canvas.getContext("2d")!;
-  await page.render({ canvasContext: ctx, viewport, canvas } as never).promise;
+  // Render offscreen first so concurrent renders (e.g. React strict mode) never share a canvas.
+  const tmp = document.createElement("canvas");
+  tmp.width = Math.floor(viewport.width);
+  tmp.height = Math.floor(viewport.height);
+  await page.render({ canvasContext: tmp.getContext("2d")!, viewport, canvas: tmp } as never).promise;
+  canvas.width = tmp.width;
+  canvas.height = tmp.height;
+  canvas.getContext("2d")!.drawImage(tmp, 0, 0);
   return viewport;
 }
 

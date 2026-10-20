@@ -5,7 +5,7 @@ import { Download, Eraser, Highlighter, MousePointer2, Pen, Square, Type, Undo2,
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dropzone, FileChip, Spinner } from "./ui";
-import { baseName, download, hexToRgb01, openPdf } from "@/lib/pdf";
+import { baseName, download, hexToRgb01, openPdf, renderPage } from "@/lib/pdf";
 import { cn } from "@/lib/utils";
 
 type Tool = "select" | "text" | "pen" | "highlight" | "rect" | "whiteout" | "erase";
@@ -128,8 +128,7 @@ function EditablePage(p: {
       const page = await p.doc.getPage(p.n + 1);
       const dpr = window.devicePixelRatio || 1;
       const vp = page.getViewport({ scale: S * dpr });
-      const c = canvas.current!; c.width = vp.width; c.height = vp.height;
-      await page.render({ canvasContext: c.getContext("2d")!, viewport: vp, canvas: c } as never).promise;
+      await renderPage(p.doc, p.n + 1, canvas.current!, S * dpr);
       setDim({ w: vp.width / dpr / S, h: vp.height / dpr / S });
     })();
   }, [p.doc, p.n]);
