@@ -129,7 +129,7 @@ function PageView({ doc, n, total, scale, layers, selected, onSelect, onMove, nu
           onPointerMove={(e) => { if (!drag.current) return; const p = toPage(e); onMove(drag.current.id, p.x - drag.current.dx, p.y - drag.current.dy); }}
           onPointerUp={() => { drag.current = null; }} onPointerLeave={() => { drag.current = null; }}>
           {visible.map((l) => (
-            <g key={l.id} className={cn("cursor-move touch-none", selected === l.id && "outline-dashed")}
+            <g key={l.id} className="cursor-move touch-none"
               onPointerDown={(e) => {
                 e.preventDefault(); onSelect(l.id);
                 (e.currentTarget.ownerSVGElement as SVGSVGElement).setPointerCapture(e.pointerId);
