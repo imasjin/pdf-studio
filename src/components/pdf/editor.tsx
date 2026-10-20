@@ -55,7 +55,7 @@ export function EditorTool({ initialTool }: { initialTool: Tool }) {
         } else if (o.kind === "rect" || o.kind === "whiteout") {
           page.drawRectangle({ x: o.x, y: H - o.y - o.h, width: o.w, height: o.h,
             ...(o.kind === "whiteout" ? { color: rgb(1, 1, 1) } : { borderColor: col, borderWidth: 2 }) });
-        } else if (o.pts.length > 1) {
+        } else if ((o.kind === "pen" || o.kind === "highlight") && o.pts.length > 1) {
           const d = "M " + o.pts.map(([x, y]) => `${x} ${y}`).join(" L ");
           page.drawSvgPath(d, { x: 0, y: H, borderColor: col, borderWidth: o.width, borderOpacity: o.kind === "highlight" ? 0.35 : 1, borderLineCap: 1 as never });
         }
@@ -162,7 +162,7 @@ function EditablePage(p: {
       const d = drag.current; const dx = x - d.sx, dy = y - d.sy; const o = d.orig;
       const moved: Obj = o.kind === "pen" || o.kind === "highlight"
         ? { ...o, pts: o.pts.map(([a, b]) => [a + dx, b + dy] as [number, number]) }
-        : { ...o, x: o.x + dx, y: o.y + dy };
+        : { ...o, x: (o as { x: number }).x + dx, y: (o as { y: number }).y + dy } as Obj;
       p.setObjs(d.base.map((q) => (q.id === d.id ? moved : q)));
       return;
     }
