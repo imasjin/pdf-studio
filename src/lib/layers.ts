@@ -8,7 +8,7 @@ export interface Layer {
   kind: LayerKind;
   text: string;      // text content, or link label
   url: string;       // link target
-  img?: { dataUrl: string; bytes: Uint8Array; aspect: number }; // aspect = h / w
+  img?: { dataUrl: string; bytes: Uint8Array; aspect: number } | undefined; // aspect = h / w
   size: number;      // text font size, or image width, in PDF points
   opacity: number;   // 0..1
   angle: number;     // degrees, counter-clockwise
