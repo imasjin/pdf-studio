@@ -42,12 +42,12 @@ function Index() {
           {groups.map((g) => (
             <section key={g}>
               <h2 className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">{g}</h2>
-              <div className="grid gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {TOOLS.filter((t) => t.group === g).map((t) => {
                   const Icon = ICONS[t.id];
                   return (
                     <Link key={t.id} to="/tool/$id" params={{ id: t.id }}
-                      className="group relative flex gap-4 bg-card p-5 transition-colors hover:bg-accent">
+                      className="group relative flex gap-4 rounded-xl border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-foreground/30 hover:bg-accent">
                       <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border bg-background transition-transform group-hover:scale-105">
                         <Icon className="size-4" />
                       </div>
