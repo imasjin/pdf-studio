@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Columns2, Droplets, FileImage, FileStack, Hash, Images, Info, LayoutGrid, Lock, PenTool, Scissors, Type, Unlock } from "lucide-react";
+import { ArrowUpRight, Columns2, Droplets, FileImage, FileStack, Hash, Images, Info, LayoutGrid, Lock, PenTool, Printer, Scissors, Type, Unlock } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { TOOLS, type ToolId } from "@/lib/tools";
 
 export const ICONS: Record<ToolId, typeof Lock> = {
-  compare: Columns2, edit: Type, draw: PenTool, watermark: Droplets, protect: Lock, unlock: Unlock,
+  compare: Columns2, print: Printer, edit: Type, draw: PenTool, watermark: Droplets, protect: Lock, unlock: Unlock,
   merge: FileStack, split: Scissors, organize: LayoutGrid, "page-numbers": Hash, metadata: Info,
   "images-to-pdf": Images, "pdf-to-images": FileImage,
 };
