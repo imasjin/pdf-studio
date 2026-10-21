@@ -81,14 +81,14 @@ async function build(bytes: ArrayBuffer, o: Opts) {
         if (o.border) page.drawRectangle({ x, y, width: w, height: h, borderWidth: 0.5, borderOpacity: 0.6 });
       }
       // Short-edge flipping on a long-edge printer: rotate backs 180°.
-      const isBack = backsStartOdd ? true : s % 2 === 1;
+      const isBack = backsStartOdd || s % 2 === 1;
       if (flipBacks && isBack) page.setRotation(degrees(180));
     }
     return out.save();
   };
 
-  const shortFlip = o.flip === "short" && !landscape || o.flip === "long" && landscape && false;
-  if (o.duplex === "manual" && !(o.booklet && false)) {
+  const shortFlip = o.flip === "short";
+  if (o.duplex === "manual") {
     const { fronts, backs } = splitManual(sides, Array(nUp).fill(-1), o.reverseBacks);
     return { fronts: await make(fronts, false, false), backs: await make(backs, shortFlip, true), sheets: fronts.length };
   }

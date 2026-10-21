@@ -1,6 +1,6 @@
 export type ToolId =
   | "compare" | "edit" | "draw" | "watermark" | "protect" | "merge" | "split"
-  | "organize" | "page-numbers" | "images-to-pdf" | "pdf-to-images" | "metadata" | "unlock";
+  | "organize" | "page-numbers" | "images-to-pdf" | "pdf-to-images" | "metadata" | "unlock" | "print";
 
 export interface ToolMeta {
   id: ToolId;
@@ -22,6 +22,7 @@ export const TOOLS: ToolMeta[] = [
   { id: "unlock", name: "Unlock", desc: "Remove a known password from a PDF.", group: "Security" },
   { id: "metadata", name: "Metadata", desc: "View and edit title, author and keywords.", group: "Security" },
   { id: "images-to-pdf", name: "Images to PDF", desc: "Turn JPG and PNG files into a PDF.", group: "Convert" },
+  { id: "print", name: "Print", desc: "Double-sided, booklets, pages per sheet and more.", group: "View" },
   { id: "pdf-to-images", name: "PDF to images", desc: "Export every page as PNG or JPG.", group: "Convert" },
 ];
 

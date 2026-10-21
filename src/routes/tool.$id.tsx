@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { getTool, TOOLS, type ToolId } from "@/lib/tools";
 import { CompareTool } from "@/components/pdf/compare";
 import { EditorTool } from "@/components/pdf/editor";
+import { PrintTool } from "@/components/pdf/print";
 import { OrganizeTool } from "@/components/pdf/organize";
 import {
   ImagesToPdfTool, MergeTool, MetadataTool, PageNumbersTool, PdfToImagesTool, ProtectTool, SplitTool, UnlockTool, WatermarkTool,
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/tool/$id")({
 
 const VIEWS: Record<ToolId, () => React.ReactNode> = {
   compare: () => <CompareTool />,
+  print: () => <PrintTool />,
   edit: () => <EditorTool initialTool="text" />,
   draw: () => <EditorTool initialTool="pen" />,
   watermark: () => <WatermarkTool />,
